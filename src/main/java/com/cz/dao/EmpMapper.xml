@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cz.dao.EmpMapper">
+	<resultMap type="com.cz.pojo.Emp" id="EmpMap">
+		<id column="empNo" property="empNo" />
+ 		<result column="empName" property="empName"/>
+		<result column="sex" property="sex"/>
+		<result column="deptName" property="deptName"/>
+		<result column="jobName" property="jobName"/>
+		<result column="pwd" property="pwd"/>
+		<result column="levels" property="levels"/>
+	</resultMap>
+
+	<!-- 登录 -->
+	<select id="login" resultMap="EmpMap">
+		select e.*,j.levels as levels
+		from emp e,job j
+		where empName=#{empName} and e.jobname = j.jobName
+	</select>
+	
+	<!--  -->
+
+</mapper>

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+			body{height:100%;padding:0;margin:0;background-color: #eeeeee;}
+			.content{width:100%;height:auto;position: absolute;}
+/* 			form{display:none} */
+			#block_form1,#block_form2{display: block}
+/* 			.menu_left,.menu_content,.menu_right{float:left} */
+			/*左 */
+			.menu_left{width:20%;height:100%;background-color: #e2e2e2;float:left;position:fixed;}
+			#come{width:90%;height:150px;background-color: #d0c9a9;line-height:150px;text-align: center;
+				  color:#fff;font-size:30px;margin-left:17px;margin-top:10px;margin-bottom: 10px;}
+			.form{height:290px}
+			.menu_left .out,.add{width:100%;height:50px;}
+			.menu_left .out input,.add input{background-color:rgb(210, 210, 195);outline: none;width:100%;line-height: 50px;text-align: center;}
+			/*中 */
+			.menu_centent{width:60%;position: absolute;left:384px;float:left}
+			.right_title{width:100%;height:100px;line-height: 100px;text-align: center;font-size:40px;color:#000}
+			.right_content{width:100%;height:100%;}
+			.right_content #toptime{margin-top:15px;float: right;margin-right:97px}
+			.table{width:100%;height:100%;}
+			.table table{width:920px;height:100%;margin:10px 116px;}
+			.table table tr{height:45px;width:920px;border:1px solid #89676780}
+			.table table td{border:1px solid #89676780;border-collapse: collapse;width:400px;height:45px;line-height: 45px}
+			.table table .four .lab{width:150px;text-align:center}
+			.table table #desc{padding-left: 80px}
+			.table table #apply{float:right;margin-right:20px;margin-left:60px;}
+			.table table #apply .layui-btn{background-color:#c0b47d}
+			.table table tr #lab1{margin-top: 8px}
+			.table table label{width:100px}
+			.table table #reason{width:132px}
+			.table table .layui-form-item{margin-bottom: 0px}
+			.table table .sign{border-bottom: 1px solid #89676780;}
+			#desc{text-align:left}
+/* 			#day,#hours{margin-left:4px;margin-right:4px;color:#9e1386} */
+			.lab_right{margin-right:40px;width:145px !important;}
+			.sign_div{float:right;margin-right:30px}
+ 			.table table .apply_btn{background-coloR:#c0b47d} 
+			.lab_right span{margin-left:5px}
+			.table table #apply1,#apply2,#apply3{display:block}
+			/*进度条样式*/
+			.right_content .bar{width:100%;height:200px;margin:30px auto;}
+		    .bar .layui-progress{width:255px}
+		    .bar_div{width:920px;height:200px;}
+		    .bar{width:750px;height:100px;float:left}
+		    .bar .layui-progress,.bar i{float:left}
+		    .bar i{margin:-14px 10px 0 10px;}
+		    .tablebar{margin:50px 123px}
+		    .table .status{float:left;line-height: 30px;display: block}
+		    /*右*/
+		    .menu_right{width:20%;height:100%;background-color: #e2e2e2;float:right;position:fixed;
+		    right:0px;border-left: 2px solid #d0c9a9}
+		    .menu_right .application{width:100%;height:50px;line-height: 50px;color:#fff;
+		    background-color:#d0c9a9;text-align: center; font-size:30px;}
+		    .menu_right ul{background-color:  #e2e2e2;width:100%;height:100%;}
+		    .menu_right dl{background-color: rgba(76, 71, 71, 0.3)!important}
+		    .menu_right ul a{color:#000!important}
+		    .menu_right ul li:hover{background-color: #d0c9a9!important;}
+		    .layui-nav-tree .layui-nav-item a:hover{background-color: #d0c9a9!important;}
+		    .layui-nav-tree .layui-nav-bar{background-color: #d0c9a9!important;}

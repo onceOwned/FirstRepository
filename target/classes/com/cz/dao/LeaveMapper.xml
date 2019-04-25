@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cz.dao.LeaveMapper">
+	<insert id="insert" parameterType="Leave_user">
+		insert into LEAVE_USER(empName,deptName,jobName,reson,applyTime,startTime,endTime,totalTime,state,applyStatus)
+		values(#{empName},#{deptName},#{jobName},#{reson},#{applyTime},#{startTime},#{endTime},#{totalTime},0,1)
+	</insert>
+	<!-- 0权限 -->
+<!-- 查看申请中   -->
+    <select id="applying" resultType="Leave_user">
+		select * from leave_user where applyStatus = 1 and empName = #{empName} order by applyTime desc
+	</select>
+<!-- 查看申请失败 -->
+	<select id="Unsuccessful" resultType="Leave_user">
+		select * from leave_user where applyStatus = 0 and empName = #{empName} order by applyTime desc
+	</select>
+<!-- 查看申请成功 -->
+	<select id="successful" resultType="Leave_user">
+		select * from leave_user where applyStatus = 2 and empName = #{empName} order by applyTime desc
+	</select>
+	
+<!-- 权限查看已批准 -->
+	<select id="Accepted" resultType="Leave_user">
+		select * from leave_user where 
+		<if test="levels == 1">
+		state = 1 and applyStatus =1 and manager 
+		</if>
+		<if test="levels == 2">
+		state = 2 and applyStatus = 1 and dept_manager
+		</if>
+		<if test="levels == 3">
+		state = 3 and applyStatus = 3 and general
+		</if>
+		= #{empName} order by applyTime desc
+	</select>	
+<!-- 权限查看已驳回 -->
+	<select id="Rejected" resultType="Leave_user">
+		select * from leave_user where
+		<if test="levels == 1">
+		 state = 0 and applyStatus = 0 and manager 
+		</if>
+		<if test="levels == 2">
+		 state = 1 and applyStatus = 0 and dept_manager 
+		</if>
+		<if test="levels == 3">
+		 state = 2 and applyStatus = 0 and general 
+		</if>
+		 = #{empName} order by applyTime desc
+	</select>	
+<!-- 权限    查看审批中 -->
+	<select id="Approval" resultType="Leave_user">
+		select * from leave_user where 
+		<if test="levels == 1">
+		state = 0 and applyStatus =1 
+		</if>
+		<if test="levels == 2">
+		state = 1 and applyStatus =1 
+		</if>
+		<if test="levels == 3">
+		state = 2 and applyStatus =1 
+		</if>
+		and deptName = #{deptName}
+		order by applyTime desc
+	</select>		
+<!--  审核  驳回   -->
+	<update id="update_rejected">
+		update leave_user set 
+		<if test="levels == 1">
+		manager = #{leave.manager,jdbcType=VARCHAR},viewOne = #{leave.viewOne,jdbcType=VARCHAR}, state = 0,
+		</if>
+		<if test="levels == 2">
+		dept_manager = #{leave.dept_manager,jdbcType=VARCHAR},viewTwo = #{leave.viewTwo,jdbcType=VARCHAR}, state = 1 , 
+		</if>
+		<if test="levels == 3">
+		general = #{leave.general,jdbcType=VARCHAR},viewThree = #{leave.viewThree,jdbcType=VARCHAR},state = 2 , 
+		</if>
+		applyStatus = 0 where leaveId = #{leave.leaveId}
+	</update>
+<!--  审核  批准 -->
+	<update id="update_Accepted">
+		update leave_user set 
+		<if test="levels == 1">
+		manager = #{leave.manager,jdbcType=VARCHAR},viewOne = #{leave.viewOne,jdbcType=VARCHAR}, state = 1,applyStatus = 1 
+		</if>
+		<if test="levels == 2">
+		dept_manager = #{leave.dept_manager,jdbcType=VARCHAR},viewTwo = #{leave.viewTwo,jdbcType=VARCHAR},state = 2, applyStatus = 1
+		</if>
+		<if test="levels == 3">
+		general = #{leave.general,jdbcType=VARCHAR},viewThree = #{leave.viewThree,jdbcType=VARCHAR},state = 3, applyStatus = 2
+		</if>
+		where leaveId = #{leave.leaveId}
+	</update>
+	<!-- 左边导航栏 -->
+	<select id="findByTime" resultType="Leave_user">
+		select * from leave_user where applyTime = #{applyTime} and empName = #{empName}
+	</select>
+</mapper>
